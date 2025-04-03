@@ -1,0 +1,30 @@
+BEGIN program
+
+  PRINT "Enter number of digits (n):"
+  READ integer n
+
+  PRINT "Enter base (b):"
+  READ integer b    # base between 2 and 10
+
+  decimalResult = 0
+
+  FOR i = 0 to n-1:
+    PRINT "Enter digit Xi:"
+    READ integer Xi
+    
+    IF Xi >= b:
+      PRINT "ERROR: Digit >= base."
+      # skip or handle error
+      # (do not add anything to decimalResult)
+    ELSE:
+      # Compute power = b^i using repeated multiplication
+      power = 1
+      REPEAT i TIMES:
+        power = power * b
+      
+      partial = Xi * power
+      decimalResult = decimalResult + partial
+
+  PRINT "Decimal result = ", decimalResult
+
+END program

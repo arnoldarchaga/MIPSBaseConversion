@@ -1,4 +1,4 @@
-        .data
+.data
 promptN:       .asciiz "Enter number of digits (n): "
 promptB:       .asciiz "Enter base b (2..10): "
 promptDigit:   .asciiz "Enter digit Xi: "
@@ -6,8 +6,8 @@ errorDigit:    .asciiz "ERROR: Digit >= base.\n"
 resultMsg:     .asciiz "Decimal result = "
 newline:       .asciiz "\n"
 
-        .text
-        .globl main
+.text
+.globl main
 
 # MAIN PROGRAM:
 # 1) Prompts for n, b
@@ -59,8 +59,7 @@ loop_read_digit:
     la   $a0, errorDigit
     li   $v0, 4
     syscall
-    # For simplicity, we skip or ignore this digit
-    j    skip_digit
+    j    loop_read_digit       # go back to read digit again
 
 valid_digit:
     # Compute b^i => store in t4
@@ -79,7 +78,6 @@ power_done:
     # decimalResult += partial_result
     add  $t2, $t2, $t6
 
-skip_digit:
     # i++
     addi $s0, $s0, 1
     j    loop_read_digit
